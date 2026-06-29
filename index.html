@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nitish Rai — Data Analyst</title>
+<meta name="description" content="Nitish Rai — Data Analyst. SQL, Python, Power BI & Tableau. Built an ML pricing model and an AI data chatbot." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-950:#081726;
+    --navy-900:#0a1f38;
+    --navy-800:#123a5e;
+    --panel:#0f2a47;
+    --teal:#1d9e75;
+    --teal-soft:rgba(29,158,117,0.14);
+    --coral:#f0997b;
+    --coral-soft:rgba(240,153,123,0.16);
+    --paper:#f6f7f9;
+    --paper-line:rgba(10,30,50,0.08);
+    --ink:#0d1b2e;
+    --ink-soft:#4c5b6d;
+    --cream:#eef1f4;
+    --max:1080px;
+    --display: 'Space Grotesk', sans-serif;
+    --body: 'IBM Plex Sans', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-padding-top:84px;}
+  @media (prefers-reduced-motion:no-preference){
+    html{scroll-behavior:smooth;}
+  }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{display:block;max-width:100%;}
+  a{color:inherit;}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 28px;}
+  h1,h2,h3{font-family:var(--display);margin:0;letter-spacing:-0.01em;}
+
+  .skip-link{
+    position:absolute;left:-999px;top:0;
+    background:var(--teal);color:#fff;padding:10px 16px;border-radius:0 0 8px 0;z-index:100;
+  }
+  .skip-link:focus{left:0;}
+
+  :focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:2px;}
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:0.72rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--teal);
+    display:flex;align-items:center;gap:8px;
+    margin-bottom:14px;
+  }
+  .eyebrow::before{content:"//";color:var(--coral);}
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(8,23,38,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;}
+  .nav__brand{
+    font-family:var(--mono);font-weight:600;color:#fff;font-size:1rem;
+    display:flex;align-items:center;gap:8px;text-decoration:none;
+  }
+  .nav__brand .dot{width:8px;height:8px;border-radius:50%;background:var(--teal);}
+  .nav__links{display:flex;align-items:center;gap:28px;list-style:none;margin:0;padding:0;}
+  .nav__links a{
+    color:#cdd8e3;text-decoration:none;font-size:0.92rem;
+    transition:color .15s ease;
+  }
+  .nav__links a:hover{color:#fff;}
+  .nav__cta{
+    font-family:var(--mono);font-size:0.85rem;color:var(--navy-950);
+    background:var(--teal);padding:9px 16px;border-radius:6px;text-decoration:none;
+    border:1px solid var(--teal);
+  }
+  .nav__cta:hover{background:#21b585;}
+  .nav__toggle{
+    display:none;background:none;border:1px solid rgba(255,255,255,0.25);
+    border-radius:6px;color:#fff;width:38px;height:34px;cursor:pointer;
+    font-size:1.1rem;
+  }
+  .nav__mobile{display:none;}
+
+  @media (max-width:760px){
+    .nav__links, .nav__cta{display:none;}
+    .nav__toggle{display:block;}
+    .nav__mobile{
+      display:none;flex-direction:column;gap:2px;
+      background:var(--navy-950);border-top:1px solid rgba(255,255,255,0.08);
+      padding:10px 28px 18px;
+    }
+    .nav__mobile.is-open{display:flex;}
+    .nav__mobile a{
+      color:#dbe4ee;text-decoration:none;padding:12px 0;
+      border-bottom:1px solid rgba(255,255,255,0.06);font-size:0.95rem;
+    }
+    .nav__mobile a:last-child{border-bottom:none;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:radial-gradient(ellipse 900px 500px at 80% -10%, rgba(29,158,117,0.16), transparent 60%), var(--navy-900);
+    color:#fff;
+    padding:72px 0 88px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::after{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size:26px 26px;
+    mask-image:linear-gradient(to bottom, transparent, rgba(0,0,0,0.5) 30%, transparent 85%);
+  }
+  .hero .wrap{
+    position:relative;z-index:1;
+    display:grid;grid-template-columns:1.25fr 1fr;gap:56px;align-items:center;
+  }
+  .status{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:var(--mono);font-size:0.78rem;color:#a9e6cf;
+    background:rgba(29,158,117,0.12);border:1px solid rgba(29,158,117,0.35);
+    padding:6px 12px;border-radius:99px;margin-bottom:22px;
+  }
+  .status__dot{
+    width:7px;height:7px;border-radius:50%;background:#3ee79b;
+    box-shadow:0 0 0 0 rgba(62,231,155,0.6);
+    animation:pulse 2.2s infinite;
+  }
+  @media (prefers-reduced-motion:reduce){.status__dot{animation:none;}}
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(62,231,155,0.55);}
+    70%{box-shadow:0 0 0 7px rgba(62,231,155,0);}
+    100%{box-shadow:0 0 0 0 rgba(62,231,155,0);}
+  }
+  .hero h1{
+    font-size:clamp(2.4rem, 5vw, 3.6rem);
+    font-weight:700;color:#fff;
+  }
+  .hero h1 span{color:var(--teal);}
+  .hero p.lede{
+    font-size:1.12rem;color:#bcccdc;max-width:46ch;margin:18px 0 30px;
+  }
+  .hero__ctas{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{
+    font-family:var(--mono);font-size:0.9rem;text-decoration:none;
+    padding:12px 22px;border-radius:7px;display:inline-flex;align-items:center;gap:8px;
+    transition:transform .15s ease, background .15s ease, color .15s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn--primary{background:var(--teal);color:var(--navy-950);border:1px solid var(--teal);}
+  .btn--primary:hover{background:#21b585;}
+  .btn--ghost{border:1px solid rgba(255,255,255,0.3);color:#fff;}
+  .btn--ghost:hover{border-color:var(--teal);color:var(--teal);}
+  .btn--dark{border:1px solid var(--navy-900);color:var(--navy-900);}
+  .btn--dark:hover{background:var(--navy-900);color:#fff;}
+
+  /* KPI panel */
+  .kpi-panel{
+    background:var(--panel);
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:14px;padding:20px;
+    display:grid;grid-template-columns:1fr 1fr;gap:14px;
+  }
+  .kpi{
+    background:rgba(255,255,255,0.03);
+    border-radius:10px;padding:16px 16px 14px;
+    opacity:0;transform:translateY(10px);
+    animation:rise .5s ease forwards;
+  }
+  @media (prefers-reduced-motion:reduce){.kpi{opacity:1;transform:none;animation:none;}}
+  .kpi:nth-child(1){animation-delay:.05s;}
+  .kpi:nth-child(2){animation-delay:.18s;}
+  .kpi:nth-child(3){animation-delay:.31s;}
+  .kpi:nth-child(4){animation-delay:.44s;}
+  @keyframes rise{to{opacity:1;transform:translateY(0);}}
+  .kpi__bar{width:26px;height:3px;border-radius:2px;margin-bottom:10px;}
+  .kpi:nth-child(odd) .kpi__bar{background:var(--teal);}
+  .kpi:nth-child(even) .kpi__bar{background:var(--coral);}
+  .kpi__num{font-family:var(--mono);font-size:1.55rem;font-weight:600;color:#fff;}
+  .kpi__label{font-size:0.74rem;color:#9fb1c4;margin-top:4px;line-height:1.4;}
+
+  @media (max-width:880px){
+    .hero .wrap{grid-template-columns:1fr;}
+  }
+
+  /* ---------- shared section ---------- */
+  .section{padding:84px 0;}
+  .section--alt{background:var(--cream);}
+  .section__head{max-width:560px;margin-bottom:44px;}
+  .section__head h2{font-size:clamp(1.7rem,3vw,2.2rem);}
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease, transform .6s ease;}
+  .reveal.is-visible{opacity:1;transform:translateY(0);}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;}}
+
+  /* ---------- ABOUT ---------- */
+  .about__grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
+  .terminal{
+    background:var(--navy-950);border-radius:12px;overflow:hidden;
+    border:1px solid rgba(255,255,255,0.08);
+  }
+  .terminal__bar{
+    display:flex;gap:6px;padding:12px 14px;background:#0c2034;
+  }
+  .terminal__bar span{width:10px;height:10px;border-radius:50%;background:#33455a;}
+  .terminal__body{padding:22px 24px 26px;font-family:var(--mono);font-size:0.88rem;color:#cdd8e3;}
+  .terminal__body .k{color:#7fb7ff;}
+  .terminal__body .s{color:var(--coral);}
+  .terminal__body p{margin:0 0 14px;color:#dce6f0;line-height:1.75;}
+  .terminal__body p:last-child{margin-bottom:0;}
+  .about__facts{font-family:var(--body);}
+  .about__facts ul{list-style:none;margin:0;padding:0;}
+  .about__facts li{
+    display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--paper-line);
+  }
+  .about__facts li:first-child{padding-top:0;}
+  .about__facts .f-k{font-family:var(--mono);font-size:0.78rem;color:var(--ink-soft);min-width:108px;}
+  .about__facts .f-v{font-weight:500;}
+
+  @media (max-width:880px){.about__grid{grid-template-columns:1fr;}}
+
+  /* ---------- SKILLS / SCHEMA ---------- */
+  .schema{
+    width:100%;border-collapse:collapse;
+    background:#fff;border-radius:12px;overflow:hidden;
+    border:1px solid var(--paper-line);
+  }
+  .schema thead th{
+    text-align:left;font-family:var(--mono);font-size:0.74rem;
+    text-transform:uppercase;letter-spacing:0.06em;color:var(--ink-soft);
+    background:var(--cream);padding:14px 20px;border-bottom:1px solid var(--paper-line);
+  }
+  .schema tbody td{
+    padding:18px 20px;border-bottom:1px solid var(--paper-line);vertical-align:top;
+  }
+  .schema tbody tr:last-child td{border-bottom:none;}
+  .schema tbody tr:hover{background:var(--teal-soft);}
+  .schema .field{font-weight:600;}
+  .schema .type{
+    font-family:var(--mono);font-size:0.74rem;color:var(--teal);
+    background:var(--teal-soft);padding:3px 9px;border-radius:99px;display:inline-block;
+  }
+  .schema .examples{color:var(--ink-soft);font-size:0.93rem;}
+
+  @media (max-width:680px){
+    .schema thead{display:none;}
+    .schema, .schema tbody, .schema tr, .schema td{display:block;width:100%;}
+    .schema tr{padding:16px 20px;border-bottom:1px solid var(--paper-line);}
+    .schema td{padding:4px 0;border-bottom:none;}
+    .schema td.field::before{content:"Field — ";font-family:var(--mono);font-size:0.7rem;color:var(--ink-soft);}
+  }
+
+  /* ---------- PROJECTS ---------- */
+  .projects-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+  @media (max-width:880px){.projects-grid{grid-template-columns:1fr;}}
+  .project{
+    background:#fff;border-radius:14px;border:1px solid var(--paper-line);
+    padding:28px;display:flex;flex-direction:column;gap:18px;
+  }
+  .project__top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;}
+  .project__tag{font-family:var(--mono);font-size:0.72rem;color:var(--ink-soft);}
+  .project h3{font-size:1.3rem;margin-bottom:4px;}
+  .project p.desc{color:var(--ink-soft);margin:0;font-size:0.95rem;}
+
+  .viz-bars{display:flex;align-items:flex-end;gap:7px;height:64px;padding:0 2px;}
+  .viz-bars i{flex:1;border-radius:3px 3px 0 0;background:var(--teal);opacity:0.85;}
+  .viz-bars i:nth-child(2){background:var(--coral);}
+  .viz-bars i:nth-child(4){background:var(--coral);}
+
+  .viz-chat{display:flex;flex-direction:column;gap:8px;}
+  .viz-chat .bubble{
+    font-family:var(--mono);font-size:0.78rem;padding:9px 12px;border-radius:9px;
+    max-width:84%;line-height:1.5;
+  }
+  .viz-chat .bubble--q{background:var(--cream);color:var(--ink);align-self:flex-start;}
+  .viz-chat .bubble--a{background:var(--navy-900);color:#dbe9f1;align-self:flex-end;}
+  .viz-chat .tag{font-family:var(--mono);font-size:0.65rem;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.06em;}
+
+  .project ul.bullets{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:9px;}
+  .project ul.bullets li{
+    font-size:0.92rem;color:var(--ink);padding-left:16px;position:relative;
+  }
+  .project ul.bullets li::before{
+    content:"";position:absolute;left:0;top:0.55em;width:6px;height:6px;border-radius:50%;background:var(--teal);
+  }
+
+  .metrics-row{display:flex;flex-wrap:wrap;gap:8px;}
+  .metric-chip{
+    font-family:var(--mono);font-size:0.72rem;background:var(--cream);
+    border:1px solid var(--paper-line);padding:5px 10px;border-radius:7px;color:var(--ink-soft);
+  }
+  .stack-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;}
+  .stack-chip{
+    font-size:0.72rem;background:var(--navy-900);color:#fff;padding:4px 10px;border-radius:99px;
+  }
+  .project__cta{
+    margin-top:6px;font-family:var(--mono);font-size:0.85rem;color:var(--teal);
+    text-decoration:none;display:inline-flex;align-items:center;gap:6px;
+  }
+  .project__cta:hover{text-decoration:underline;}
+
+  /* ---------- CERT STRIP ---------- */
+  .cert{
+    display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+    background:var(--navy-900);color:#fff;border-radius:14px;padding:24px 28px;
+  }
+  .cert__badge{
+    width:42px;height:42px;border-radius:50%;background:var(--teal);
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .cert__badge svg{width:20px;height:20px;}
+  .cert__text strong{display:block;font-size:1rem;}
+  .cert__text span{font-size:0.85rem;color:#a9bbcd;}
+  .cert a{
+    margin-left:auto;font-family:var(--mono);font-size:0.82rem;color:var(--teal);text-decoration:none;
+  }
+  .cert a:hover{text-decoration:underline;}
+  @media (max-width:600px){.cert a{margin-left:0;}}
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  .contact{
+    background:var(--navy-950);color:#fff;text-align:center;padding:90px 0 50px;
+  }
+  .contact h2{font-size:clamp(1.8rem,4vw,2.6rem);max-width:18ch;margin:0 auto 16px;}
+  .contact p{color:#a9bbcd;max-width:46ch;margin:0 auto 32px;}
+  .contact__ctas{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-bottom:56px;}
+  .footer{
+    border-top:1px solid rgba(255,255,255,0.08);padding-top:24px;
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
+    font-size:0.8rem;color:#7e92a7;font-family:var(--mono);
+  }
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<header class="nav">
+  <div class="wrap">
+    <a href="#" class="nav__brand"><span class="dot"></span>NR</a>
+    <ul class="nav__links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a class="nav__cta" href="mailto:nitishrai682@gmail.com">Email me</a>
+    <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navMobile" aria-label="Open menu">☰</button>
+  </div>
+  <nav class="nav__mobile" id="navMobile">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+    <a href="mailto:nitishrai682@gmail.com">Email me</a>
+  </nav>
+</header>
+
+<main id="main">
+
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <span class="status"><span class="status__dot"></span>Open to Data Analyst roles — remote / pan-India</span>
+        <h1>Nitish Rai<br><span>Data Analyst</span></h1>
+        <p class="lede">I turn messy, real-world datasets into decisions — with SQL, Python, and dashboards people actually use. Big 4 Ready certified.</p>
+        <div class="hero__ctas">
+          <a class="btn btn--primary" href="#projects">View projects</a>
+          <a class="btn btn--ghost" href="mailto:nitishrai682@gmail.com">Email me</a>
+        </div>
+      </div>
+      <div class="kpi-panel" role="group" aria-label="Quick stats">
+        <div class="kpi"><div class="kpi__bar"></div><div class="kpi__num">15,000</div><div class="kpi__label">Rows cleaned in one ETL run</div></div>
+        <div class="kpi"><div class="kpi__bar"></div><div class="kpi__num">100%</div><div class="kpi__label">Manual prep effort eliminated</div></div>
+        <div class="kpi"><div class="kpi__bar"></div><div class="kpi__num">&lt;2s</div><div class="kpi__label">Query-to-insight time in DataBot</div></div>
+        <div class="kpi"><div class="kpi__bar"></div><div class="kpi__num">4</div><div class="kpi__label">Regression models compared</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="wrap">
+      <div class="about__grid">
+        <div class="reveal">
+          <div class="eyebrow">who_is_nitish.sql</div>
+          <div class="terminal">
+            <div class="terminal__bar"><span></span><span></span><span></span></div>
+            <div class="terminal__body">
+              <p><span class="k">SELECT</span> story <span class="k">FROM</span> career <span class="k">WHERE</span> year = <span class="s">'2025-26'</span>;</p>
+              <p>I spent the last year building things, not just studying them. A 15,000-row used-car dataset became four competing regression models. A pile of CSVs became DataBot, a chatbot that answers data questions in plain English in under two seconds.</p>
+              <p>I'm BCA-trained, Big 4 Ready certified, and looking for the room where that gets to keep happening.</p>
+            </div>
+          </div>
+        </div>
+        <div class="about__facts reveal">
+          <div class="eyebrow">at a glance</div>
+          <h2 style="margin-bottom:22px;">Currently looking for my first analyst role</h2>
+          <ul>
+            <li><span class="f-k">Status</span><span class="f-v">Open to entry-level / internship — remote, onsite, pan-India</span></li>
+            <li><span class="f-k">Education</span><span class="f-v">BCA, Rama University, Kanpur</span></li>
+            <li><span class="f-k">Certified</span><span class="f-v">Data Analyst — Big 4 Ready (OneRoadmap)</span></li>
+            <li><span class="f-k">Based in</span><span class="f-v">Kanpur, Uttar Pradesh, India</span></li>
+            <li><span class="f-k">Available</span><span class="f-v">Immediately — full-time, internship, or freelance</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt" id="skills">
+    <div class="wrap">
+      <div class="section__head reveal">
+        <div class="eyebrow">schema: skills</div>
+        <h2>What I work with</h2>
+      </div>
+      <table class="schema reveal">
+        <thead>
+          <tr><th>Field</th><th>Type</th><th>Examples</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="field">Languages</td>
+            <td><span class="type">core</span></td>
+            <td class="examples">SQL (MySQL, PostgreSQL) &middot; Python (Pandas, NumPy, Scikit-learn, XGBoost)</td>
+          </tr>
+          <tr>
+            <td class="field">Visualization</td>
+            <td><span class="type">core</span></td>
+            <td class="examples">Power BI &middot; Tableau &middot; Excel &middot; Plotly &middot; Matplotlib</td>
+          </tr>
+          <tr>
+            <td class="field">Databases</td>
+            <td><span class="type">infra</span></td>
+            <td class="examples">MySQL &middot; PostgreSQL &middot; SQLite</td>
+          </tr>
+          <tr>
+            <td class="field">Methods</td>
+            <td><span class="type">practice</span></td>
+            <td class="examples">ETL pipelines &middot; EDA &middot; Statistical analysis &middot; Model evaluation (MAE / RMSE / R&sup2;) &middot; KPI tracking</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section" id="projects">
+    <div class="wrap">
+      <div class="section__head reveal">
+        <div class="eyebrow">projects</div>
+        <h2>Things I've shipped</h2>
+      </div>
+      <div class="projects-grid">
+
+        <article class="project reveal">
+          <div class="project__top">
+            <div>
+              <h3>Used Cars Price Prediction</h3>
+              <span class="project__tag">ML capstone &middot; 2024–2025</span>
+            </div>
+          </div>
+          <div class="viz-bars" aria-hidden="true"><i style="height:38%"></i><i style="height:62%"></i><i style="height:48%"></i><i style="height:85%"></i><i style="height:55%"></i></div>
+          <p class="desc">An end-to-end ML pipeline analyzing a 15,000-row, 26-column used-vehicle dataset to find what really drives resale price.</p>
+          <ul class="bullets">
+            <li>Built a full ETL pipeline that cut manual data-prep effort by 100%</li>
+            <li>Compared 4 regression models (Linear, Decision Tree, Random Forest, XGBoost) on MAE / RMSE / R&sup2;</li>
+            <li>Shipped an interactive Tableau dashboard for non-technical stakeholders</li>
+          </ul>
+          <div class="metrics-row">
+            <span class="metric-chip">15,000 rows</span>
+            <span class="metric-chip">26 features</span>
+            <span class="metric-chip">4 models compared</span>
+          </div>
+          <div class="stack-row">
+            <span class="stack-chip">Python</span><span class="stack-chip">Pandas</span><span class="stack-chip">Scikit-learn</span><span class="stack-chip">XGBoost</span><span class="stack-chip">Tableau</span>
+          </div>
+        </article>
+
+        <article class="project reveal">
+          <div class="project__top">
+            <div>
+              <h3>DataBot</h3>
+              <span class="project__tag">AI chatbot &middot; 2024–2025</span>
+            </div>
+          </div>
+          <div class="viz-chat" aria-hidden="true">
+            <span class="tag">Sample query</span>
+            <div class="bubble bubble--q">which month had the highest sales?</div>
+            <div class="bubble bubble--a">October — here's the trend ↗</div>
+          </div>
+          <p class="desc">A conversational data-analysis tool — ask a dataset a question in plain English, get text or a live chart back.</p>
+          <ul class="bullets">
+            <li>Real-time LLM pipeline (Llama 3.3 70B via Groq) answering in under 2 seconds</li>
+            <li>Custom parser renders live Plotly charts inline in the chat thread</li>
+            <li>100% pass rate across 15 QA tests, including malformed-input edge cases</li>
+          </ul>
+          <div class="metrics-row">
+            <span class="metric-chip">&lt;2s response</span>
+            <span class="metric-chip">15 / 15 QA tests</span>
+            <span class="metric-chip">PDF + Excel export</span>
+          </div>
+          <div class="stack-row">
+            <span class="stack-chip">Python</span><span class="stack-chip">Streamlit</span><span class="stack-chip">Groq API</span><span class="stack-chip">SQLite</span>
+          </div>
+          <a class="project__cta" href="https://llm-powered-datachatbot-app.streamlit.app" target="_blank" rel="noopener">Try the live app ↗</a>
+        </article>
+
+      </div>
+
+      <div class="cert reveal" style="margin-top:32px;">
+        <div class="cert__badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#081726" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="cert__text">
+          <strong>Data Analyst — Big 4 Ready</strong>
+          <span>OneRoadmap &middot; Certificate ID CERT-6633ECF1</span>
+        </div>
+        <a href="https://oneroadmap.io/skills/data-analyst-big4/certificate/CERT-6633ECF1" target="_blank" rel="noopener">Verify credential ↗</a>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <div class="eyebrow" style="justify-content:center;">contact</div>
+      <h2>Let's talk data.</h2>
+      <p>Open to Data Analyst and BI Analyst roles — entry-level, internship, remote or onsite, anywhere in India.</p>
+      <div class="contact__ctas">
+        <a class="btn btn--primary" href="mailto:nitishrai682@gmail.com">Email me</a>
+        <a class="btn btn--ghost" href="https://www.linkedin.com/in/nitishrai-0ab428234" target="_blank" rel="noopener">Connect on LinkedIn</a>
+      </div>
+      <div class="footer">
+        <span>Nitish Rai &middot; Kanpur, India</span>
+        <span>Built with HTML, CSS &amp; JS</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const navMobile = document.getElementById('navMobile');
+  navToggle.addEventListener('click', () => {
+    const isOpen = navMobile.classList.toggle('is-open');
+    navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    navToggle.textContent = isOpen ? '✕' : '☰';
+  });
+  navMobile.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      navMobile.classList.remove('is-open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      navToggle.textContent = '☰';
+    });
+  });
+
+  // Scroll-reveal sections
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const revealEls = document.querySelectorAll('.reveal');
+  if (reduceMotion) {
+    revealEls.forEach(el => el.classList.add('is-visible'));
+  } else if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('is-visible'));
+  }
+</script>
+</body>
+</html>
